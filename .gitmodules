@@ -1,0 +1,3 @@
+[submodule "BcoreLib"]
+	path = BcoreLib
+	url = git@github.com:shaga/BcoreLib.git
