@@ -1,0 +1,41 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:customViews="using:bCoreDriver2.Views.CustomViews"
+    xmlns:local="using:bCoreDriver2">
+
+    <Style TargetType="customViews:BcoreControlSlider">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="customViews:BcoreControlSlider">
+                    <Grid
+                        HorizontalAlignment="Stretch"
+                        Visibility="{TemplateBinding Visibility}"
+                        Margin="{TemplateBinding Margin}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="60"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto" MinWidth="120"/>
+                            <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PortName}"/>
+                        <customViews:BcoreSlider Grid.Column="1"
+                                                 IsAutoReset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsAutoReset}"
+                                                 UpdateCommand="{TemplateBinding UpdateCommand}"
+                                                 Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SliderValue, Mode=TwoWay}"
+                                                 Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SliderStyle}"/>
+                        <ToggleSwitch Grid.Column="2"
+                                      OnContent="AutoReset" OffContent="Hold"
+                                      IsOn="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsAutoReset, Mode=TwoWay}"/>
+                        <Button Grid.Column="3" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ResetButtonText}"
+                                Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ResetCommand}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

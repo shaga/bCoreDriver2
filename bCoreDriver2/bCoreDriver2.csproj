@@ -119,10 +119,28 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Models\BcoreController.cs" />
+    <Compile Include="Models\Settings\BcoreSetting.cs" />
+    <Compile Include="Models\Settings\MotorSetting.cs" />
+    <Compile Include="Models\Settings\PortOutSetting.cs" />
+    <Compile Include="Models\Settings\ServoSetting.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ControlPageViewModel.cs" />
+    <Compile Include="ViewModels\ScanPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingPageViewModel.cs" />
+    <Compile Include="Views\ControlPage.xaml.cs">
+      <DependentUpon>ControlPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Views\CustomViews\BcoreControlSlider.cs" />
+    <Compile Include="Views\CustomViews\BcoreSlider.cs" />
+    <Compile Include="Views\ScanPage.xaml.cs">
+      <DependentUpon>ScanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -130,13 +148,53 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.scale-125.png" />
+    <Content Include="Assets\Square310x310Logo.scale-150.png" />
+    <Content Include="Assets\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-125.png" />
+    <Content Include="Assets\Square71x71Logo.scale-150.png" />
+    <Content Include="Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +202,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ControlPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -160,10 +230,12 @@
       <Version>8.1.97</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\BcoreLib\BcoreLib\BcoreLib.csproj">
+      <Project>{321fc65e-236d-40e6-96c9-4d291ddf129f}</Project>
+      <Name>BcoreLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

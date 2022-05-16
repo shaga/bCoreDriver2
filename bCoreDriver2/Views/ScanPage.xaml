@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="bCoreDriver2.Views.ScanPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:bCoreDriver2.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:bCoreDriver2.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.DataContext>
+        <viewModels:ScanPageViewModel/>        
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0"
+                  ItemsSource="{Binding FoundDevices}"
+                  SelectedItem="{Binding SelectedDevice, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Grid.Row="1"
+                HorizontalAlignment="Stretch" Margin="10"
+                Command="{Binding ScanCommand}">
+            <TextBlock Text="{Binding ButtonText}"></TextBlock>
+        </Button>
+
+        <ProgressRing Grid.Row="0" Width="100" Height="100" IsActive="{Binding IsScanning}"/>
+    </Grid>
+</Page>

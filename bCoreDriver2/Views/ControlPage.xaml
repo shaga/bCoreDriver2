@@ -1,0 +1,148 @@
+﻿<Page
+    x:Class="bCoreDriver2.Views.ControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:bCoreDriver2.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:bCoreDriver2.ViewModels"
+    xmlns:customViews="using:bCoreDriver2.Views.CustomViews"
+    xmlns:converters="using:bCoreDriver2.Views.Converters"
+    xmlns:system="using:System"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <viewModels:ControlPageViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5 0"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5 0"/>
+            <Setter Property="MinWidth" Value="80"/>
+        </Style>
+
+        <Style TargetType="ToggleButton">
+            <Setter Property="Margin" Value="10 0"/>
+            <Setter Property="MinWidth" Value="80"/>
+        </Style>
+    </Page.Resources>
+
+    <Page.TopAppBar>
+        <CommandBar OverflowButtonVisibility="Collapsed">
+            <CommandBar.Content>
+                <TextBlock Grid.Column="0" Margin="10" Text="{Binding Controller.DeviceName}"/>
+            </CommandBar.Content>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Setting" Command="{Binding MoveSettingCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.TopAppBar>
+
+    <ScrollViewer HorizontalScrollMode="Disabled"
+                  VerticalScrollMode="Auto"
+                  HorizontalScrollBarVisibility="Hidden"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                       HorizontalAlignment="Center" Margin="10"
+                       Text="{Binding Controller.BatteryVoltageStr}"/>
+
+            <customViews:BcoreControlSlider Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleMotor1, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Motor" Index="0" Margin="5"
+                                            SliderValue="{Binding Controller.MotorValue1, Mode=TwoWay}"
+            />
+            <customViews:BcoreControlSlider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleMotor2, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Motor" Index="1" Margin="5"
+                                            SliderValue="{Binding Controller.MotorValue2, Mode=TwoWay}"
+            />
+            <customViews:BcoreControlSlider Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleMotor3, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Motor" Index="2" Margin="5"
+                                            SliderValue="{Binding Controller.MotorValue3, Mode=TwoWay}"
+            />
+            <customViews:BcoreControlSlider Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleMotor4, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Motor" Index="3" Margin="5"
+                                            SliderValue="{Binding Controller.MotorValue4, Mode=TwoWay}"
+            />
+
+            <customViews:BcoreControlSlider Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleServo1, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Servo" Index="0" Margin="5"
+                                            SliderValue="{Binding Controller.ServoValue1, Mode=TwoWay}"/>
+            <customViews:BcoreControlSlider Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleServo2, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Servo" Index="1" Margin="5"
+                                            SliderValue="{Binding Controller.ServoValue2, Mode=TwoWay}"/>
+            <customViews:BcoreControlSlider Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleServo3, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Servo" Index="2" Margin="5"
+                                            SliderValue="{Binding Controller.ServoValue3, Mode=TwoWay}"/>
+            <customViews:BcoreControlSlider Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
+                                            Visibility="{Binding Controller.IsVisibleServo4, Converter={StaticResource BoolVisibilityConverter}}"
+                                            SliderType="Servo" Index="3" Margin="5"
+                                            SliderValue="{Binding Controller.ServoValue4, Mode=TwoWay}"/>
+
+            <ToggleButton Grid.Row="10" Grid.Column="0" Content="LED1"
+                          Style="{StaticResource TogglePortOutStyle}"
+                          Visibility="{Binding Controller.IsVisiblePortOut1, Converter={StaticResource BoolVisibilityConverter}}"
+                          IsChecked="{Binding Controller.PortOutCheck1, Mode=TwoWay}"/>
+            <ToggleButton Grid.Row="10" Grid.Column="1" Content="LED2"
+                          Style="{StaticResource TogglePortOutStyle}"
+                          Visibility="{Binding Controller.IsVisiblePortOut2, Converter={StaticResource BoolVisibilityConverter}}"
+                          IsChecked="{Binding Controller.PortOutCheck2, Mode=TwoWay}"/>
+            <ToggleButton Grid.Row="10" Grid.Column="2" Content="LED3"
+                          Style="{StaticResource TogglePortOutStyle}"
+                          Visibility="{Binding Controller.IsVisiblePortOut3, Converter={StaticResource BoolVisibilityConverter}}"
+                          IsChecked="{Binding Controller.PortOutCheck2, Mode=TwoWay}"/>
+            <ToggleButton Grid.Row="10" Grid.Column="3" Content="LED4"
+                          Style="{StaticResource TogglePortOutStyle}"
+                          Visibility="{Binding Controller.IsVisiblePortOut4, Converter={StaticResource BoolVisibilityConverter}}"
+                          IsChecked="{Binding Controller.PortOutCheck3, Mode=TwoWay}"/>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="11" Grid.ColumnSpan="4" Background="GhostWhite"
+                  Visibility="{Binding IsConnecting, Converter={StaticResource BoolVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ProgressRing Grid.Row="2" Width="100"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                              IsAccessKeyScope="{Binding IsConnecting}"/>
+                <TextBlock Grid.Row="3" HorizontalAlignment="Center" Text="Connecting"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>
